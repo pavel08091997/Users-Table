@@ -1,0 +1,19 @@
+.UserTable {
+  display: table-row;
+}
+
+.UserTable > div {
+  /* все прямые div внутри строки — ячейки */
+  display: table-cell;
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Чередование фона */
+.UserList .UserTable:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.UserList .UserTable:hover {
+  background-color: #f1f1f1;
+}
