@@ -2,7 +2,7 @@ import { UserItem } from "./UserItem";
 import styles from './UserList.module.css'
 
 
-export const UserList = ({ dataUser = [] }) => {
+export const UserList = ({ dataUser = [], handleClickUser }) => {
 
 const columns = ['Фамилия', 'Имя', 'Отчество', 'Возраст', 'Пол', 'Email', 'Телефон', 'Страна', 'Город'];
 
@@ -23,6 +23,11 @@ const columns = ['Фамилия', 'Имя', 'Отчество', 'Возраст
           phone={user.phone}
           city={user.address.city}
           country={user.address.country}
+          address={user.address.address}
+          image = {user.image}
+          height = {user.height}
+          weight = {user.weight}
+          handleClickUser={handleClickUser}
         />
       ))}
     </div>

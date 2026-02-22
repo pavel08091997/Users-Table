@@ -1,5 +1,6 @@
 .UserTable {
   display: table-row;
+ 
 }
 
 .UserTable > div {
@@ -7,6 +8,8 @@
   display: table-cell;
   padding: 12px 15px;
   border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  
 }
 
 /* Чередование фона */
