@@ -1,19 +1,54 @@
 import { UserItem } from "./UserItem";
-import styles from './UserList.module.css'
+import styles from "./UserList.module.css";
 
+export const UserList = ({
+  users = [],
+  handleClickUser,
+  sortConfig,
+  ChangeSort,
+}) => {
+  const columns = [
+    { key: "lastName", label: "Фамилия" },
+    { key: "firstName", label: "Имя" },
+    { key: "maidenName", label: "Отчество" },
+    { key: "age", label: "Возраст" },
+    { key: "gender", label: "Пол" },
+    { key: "email", label: "Email" },
+    { key: "phone", label: "Телефон" },
+    { key: "city", label: "Город" },
+    { key: "country", label: "Страна" },
+  ];
 
-export const UserList = ({ dataUser = [], handleClickUser }) => {
-
-const columns = ['Фамилия', 'Имя', 'Отчество', 'Возраст', 'Пол', 'Email', 'Телефон', 'Страна', 'Город'];
-
+  const SortIcon = (key) => {
+    if (key === "email") return " ";
+    if (key === "country") return "";
+    if (key === "city") return " ";
+    if (sortConfig.key !== key) return "↕️";
+    if (sortConfig.change === "asc") return "↑";
+    if (sortConfig.change === "desc") return "↓";
+    return "↕️";
+  };
 
   return (
     <div className={styles.UserList}>
       <div className={styles.headerRow}>
-      {columns.map((col,index) => <div key={index} className={styles.headerCell}>{col}</div>)}
+        {columns.map((col) => (
+          <div
+            key={col.key}
+            className={styles.headerCell}
+            onClick={() => {
+              if (col.key !== "email") {
+                ChangeSort(col.key);
+              }
+            }}
+          >
+            {col.label} {SortIcon(col.key)}
+          </div>
+        ))}
       </div>
-      {dataUser.map((user) => (
-        <UserItem key={user.id}
+      {users.map((user) => (
+        <UserItem
+          key={user.id}
           firstName={user.firstName}
           lastName={user.lastName}
           maidenName={user.maidenName}
@@ -24,9 +59,9 @@ const columns = ['Фамилия', 'Имя', 'Отчество', 'Возраст
           city={user.address.city}
           country={user.address.country}
           address={user.address.address}
-          image = {user.image}
-          height = {user.height}
-          weight = {user.weight}
+          image={user.image}
+          height={user.height}
+          weight={user.weight}
           handleClickUser={handleClickUser}
         />
       ))}
