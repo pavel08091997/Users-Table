@@ -2,6 +2,8 @@
   display: table;
   width: 100%;
   border-collapse: collapse;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .headerRow {

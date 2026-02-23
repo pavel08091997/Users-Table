@@ -6,6 +6,8 @@ export const UserList = ({
   handleClickUser,
   sortConfig,
   ChangeSort,
+  handleFilterChange,
+  filters
 }) => {
   const columns = [
     { key: "lastName", label: "Фамилия" },

@@ -10,6 +10,21 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [sortConfig, setSortConfig] = useState({ key: null, change: null });
   const [users, setUsers] = useState([]);
+  const [filters, setFilters] = useState({
+    lastName: "",
+    firstName: "",
+    maidenName: "",
+    age: "",
+    gender: "", // для select: '' - все, 'male', 'female'
+    phone: "",
+    email: "",
+    city: "",
+    country: "",
+  });
+
+  const handleFilterChange = (key, value) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+  };
 
   const ChangeSort = (key) => {
     let change = "asc";
@@ -20,17 +35,47 @@ function App() {
         change = null;
       }
     }
-      setSortConfig({ key, change });
+    setSortConfig({ key, change });
   };
 
- // eslint-disable-next-line react-hooks/exhaustive-deps
- const SorteredUsers = useMemo(() => {
-    if (!sortConfig.key || !sortConfig.change) return users;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const FiltredAndSorteredUsers = useMemo(() => {
+    // 1. Фильтрация
+    let result = users.filter((user) => {
+      return Object.keys(filters).every((key) => {
+        const filterValue = filters[key];
+        if (!filterValue) return true;
 
-    return [...users].sort(
-      (a, b) => {
-        const aValue = a[sortConfig.key];
-        const bValue = b[sortConfig.key];
+        let userValue;
+        if (key === "city" || key === "country") {
+          userValue = user.address?.[key] || "";
+        } else {
+          userValue = user[key];
+        }
+
+        const strValue = String(userValue).toLowerCase();
+        const strFilter = String(filterValue).toLowerCase();
+
+        if (key === "gender") {
+          return strValue === strFilter; // точное совпадение
+        }
+        return strValue.includes(strFilter); // частичное совпадение
+      });
+    });
+
+    // 2. Сортировка (если задана)
+    if (sortConfig.key && sortConfig.change) {
+      result = [...result].sort((a, b) => {
+        // Используем ту же логику получения значения, что и в фильтрации
+        const getValue = (obj, key) => {
+          if (key === "city" || key === "country") {
+            return obj.address?.[key] || "";
+          }
+          return obj[key];
+        };
+
+        const aValue = getValue(a, sortConfig.key);
+        const bValue = getValue(b, sortConfig.key);
 
         if (sortConfig.key === "age") {
           return sortConfig.change === "asc"
@@ -38,12 +83,13 @@ function App() {
             : bValue - aValue;
         }
 
-        const comprare = String(aValue).localeCompare(String(bValue));
-        return sortConfig.change === "asc" ? comprare : -comprare;
-      },
-      [ users, sortConfig],
-    );
-  });
+        const compare = String(aValue).localeCompare(String(bValue));
+        return sortConfig.change === "asc" ? compare : -compare;
+      });
+    }
+
+    return result; // ← возвращаем итоговый массив
+  }, [users, filters, sortConfig]); // ← зависимости здесь
 
   const handleClickUser = (user) => {
     setUserModal(user);
@@ -95,10 +141,13 @@ function App() {
         <Loading />
       ) : (
         <UserList
-          users={SorteredUsers}
+          users={FiltredAndSorteredUsers}
           handleClickUser={handleClickUser}
           sortConfig={sortConfig}
           ChangeSort={ChangeSort}
+          handleFilterChange={handleFilterChange}
+          filters={filters}
+
         />
       )}
       {userModal && <UserModal userModal={userModal} closeModal={closeModal} />}
