@@ -15,7 +15,7 @@ function App() {
     firstName: "",
     maidenName: "",
     age: "",
-    gender: "", // для select: '' - все, 'male', 'female'
+    gender: "", 
     phone: "",
     email: "",
     city: "",
@@ -63,10 +63,10 @@ function App() {
       });
     });
 
-    // 2. Сортировка (если задана)
+    
     if (sortConfig.key && sortConfig.change) {
       result = [...result].sort((a, b) => {
-        // Используем ту же логику получения значения, что и в фильтрации
+        
         const getValue = (obj, key) => {
           if (key === "city" || key === "country") {
             return obj.address?.[key] || "";
@@ -88,8 +88,8 @@ function App() {
       });
     }
 
-    return result; // ← возвращаем итоговый массив
-  }, [users, filters, sortConfig]); // ← зависимости здесь
+    return result; 
+  }, [users, filters, sortConfig]); 
 
   const handleClickUser = (user) => {
     setUserModal(user);
