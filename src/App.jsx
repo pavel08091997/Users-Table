@@ -40,7 +40,7 @@ function App() {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const FiltredAndSorteredUsers = useMemo(() => {
-    // 1. Фильтрация
+   
     let result = users.filter((user) => {
       return Object.keys(filters).every((key) => {
         const filterValue = filters[key];
@@ -57,9 +57,9 @@ function App() {
         const strFilter = String(filterValue).toLowerCase();
 
         if (key === "gender") {
-          return strValue === strFilter; // точное совпадение
+          return strValue === strFilter; 
         }
-        return strValue.includes(strFilter); // частичное совпадение
+        return strValue.includes(strFilter); 
       });
     });
 
