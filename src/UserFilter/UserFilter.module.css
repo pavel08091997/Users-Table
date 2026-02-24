@@ -1,0 +1,36 @@
+.filterRow {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: #f4f4f4;
+  border-bottom: 2px solid #ddd;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.filterCell {
+  flex: 0 0 150px;
+  width: var(--col-width); 
+  padding: 8px 10px;
+  border-right: 1px solid #ddd;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.filterInput {
+  width: 100%;
+  max-width: 1400px;
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+  margin: 0;
+}
+
+.filterInput:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}

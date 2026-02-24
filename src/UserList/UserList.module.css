@@ -1,20 +1,20 @@
 .UserList {
-  display: table;
+  overflow-x: auto;
   width: 100%;
-  border-collapse: collapse;
   max-width: 1400px;
-  margin: 0 auto;
 }
 
 .headerRow {
-  display: table-row;
+  display: flex;
+  flex-wrap: nowrap;
   background-color: #f4f4f4;
-  font-weight: bold;
+  border-bottom: 2px solid #ddd;
 }
 
 .headerCell {
-  display: table-cell;
-  padding: 12px 15px;
-  border-bottom: 1px solid #ddd;
-  cursor: pointer;
+  flex: 0 0 150px;
+  min-width: 50px; 
+  padding: 8px 10px;
+  border-right: 1px solid #ddd;
+  box-sizing: border-box;
 }

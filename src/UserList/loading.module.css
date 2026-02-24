@@ -1,14 +1,14 @@
 .loader {
-  border: 8px solid #f3f3f3; /* Светло-серый фон */
-  border-top: 8px solid #3498db; /* Синий цвет верхней части */
-  border-radius: 50%; /* Круглая форма */
+  border: 8px solid #f3f3f3; 
+  border-top: 8px solid #3498db; 
+  border-radius: 50%; 
   width: 60px;
   height: 60px;
-  animation: spin 1s linear infinite; /* Анимация вращения */
+  animation: spin 1s linear infinite; 
   
 }
 
-/* Анимация вращения */
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

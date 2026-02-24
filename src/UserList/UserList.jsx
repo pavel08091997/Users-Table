@@ -1,5 +1,6 @@
 import { UserItem } from "./UserItem";
 import styles from "./UserList.module.css";
+import { UserFilter } from "../UserFilter/UserFilter";
 
 export const UserList = ({
   users = [],
@@ -7,7 +8,7 @@ export const UserList = ({
   sortConfig,
   ChangeSort,
   handleFilterChange,
-  filters
+  filters,
 }) => {
   const columns = [
     { key: "lastName", label: "Фамилия" },
@@ -47,6 +48,13 @@ export const UserList = ({
             {col.label} {SortIcon(col.key)}
           </div>
         ))}
+      </div>
+      <div>
+        <UserFilter
+          handleFilterChange={handleFilterChange}
+          filters={filters}
+          columns={columns}
+        />
       </div>
       {users.map((user) => (
         <UserItem

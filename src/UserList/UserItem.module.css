@@ -1,14 +1,28 @@
 .UserTable {
-  display: table-row; 
-}
-
-.UserTable > div {
-  display: table-cell;
-  padding: 12px 15px;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 1400px;
+  background-color: #fff; 
   border-bottom: 1px solid #ddd;
   cursor: pointer;
-  
 }
+
+
+.UserTable > div {
+  flex: 0 0 150px;          
+  padding: 12px 15px;       
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-right: 1px solid #eee; 
+}
+
+.UserTable > div:last-child {
+  border-right: none;
+}
+
 
 .UserList .UserTable:nth-child(even) {
   background-color: #f9f9f9;
